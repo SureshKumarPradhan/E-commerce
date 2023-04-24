@@ -71,6 +71,10 @@ const RecomandedProduct = ({ data,component }) => {
                     : ele.title}
                 </Typography>
               </Tooltip>
+              <Typography variant="h6" sx={{ mt: 1 }}>
+              {
+              `₹ ${ele.price}` }
+            </Typography>
                 <Typography
                   variant="body2"
                   color="text.secondary"
