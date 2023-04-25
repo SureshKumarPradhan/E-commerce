@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { SingleProductDataAction } from "../Action/ProductAction";
 import StarIcon from "@mui/icons-material/Star";
+import { addToCart } from "../Reducer/RootReducer";
 const ProductPage = () => {
   const location = useLocation();
   const dispatch = useDispatch();
@@ -19,6 +20,10 @@ const ProductPage = () => {
       dispatch(SingleProductDataAction(location.state));
     }
   }, []);
+  const addToCartList = (data) => {
+   dispatch(addToCart(data))
+   alert("Sucessfully Add To Cart");
+  }
   console.log(singleProductData, "single");
   return (
     <Box>
@@ -75,6 +80,7 @@ const ProductPage = () => {
                 size="small"
                 color="primary"
                 sx={{ ml: 3 }}
+                onClick={()=>addToCartList(singleProductData)}
               >
                 Add To Cart
               </Button>
