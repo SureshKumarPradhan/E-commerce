@@ -48,11 +48,11 @@ export const RecomandedListAction = createAsyncThunk('Product/RecomandedListActi
     }
   })
 
-  export const getCartList = createAsyncThunk('Product/getCartList', async (page,{ rejectWithValue }) => {
-    try {
-      const { data } = await axios.get(`https://fakestoreapi.com/carts`);
-      return data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  })
+  // export const getCartList = createAsyncThunk('Product/getCartList', async (page,{ rejectWithValue }) => {
+  //   try {
+  //     const { data } = await axios.get(`https://fakestoreapi.com/carts`);
+  //     return data;
+  //   } catch (error) {
+  //     return rejectWithValue(error.message);
+  //   }
+  // })

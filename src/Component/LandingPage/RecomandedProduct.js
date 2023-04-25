@@ -9,11 +9,18 @@ import { Box } from "@mui/material";
 import Tooltip from '@mui/material/Tooltip';
 import Rating from '@mui/material/Rating';
 import { useNavigate } from "react-router-dom";
+import { useDispatch,useSelector } from "react-redux";
+import { addToCart } from "../../Reducer/RootReducer";
 
 const RecomandedProduct = ({ data,component }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate()
   const openProductPage = (id) => {
     navigate('/product_Page',{ state:id })
+  }
+  const addCartData = (ele) =>{
+    dispatch(addToCart(ele))
+    alert("Sucessfully Add To Cart")
   }
   return (
     <Box sx={{ mt: 3 }}>
@@ -87,7 +94,7 @@ const RecomandedProduct = ({ data,component }) => {
               </CardContent>
               <CardActions sx={{mt:-3,}}>
                 <Button size="small" variant="outlined">Buy Now</Button>
-                <Button size="small" variant="outlined">Add to Cart</Button>
+                <Button size="small" variant="outlined" onClick={()=>addCartData(ele)}>Add to Cart</Button>
               </CardActions>
             </Card>
           ))}

@@ -12,7 +12,7 @@ import { setIsfilter,filterProduct } from "../../Reducer/RootReducer";
 const Nav = () => {
   const dispatch = useDispatch()
   const categoryList = useSelector(state=>state.ProductReducer.CategoryData.data)
-
+  const CartList = useSelector((state) => state.ProductReducer.CartData.data);
   const [openCategory,setOpenCategory] = useState(false)
   const [catList,setCatList] = useState(categoryList)
   const navigate = useNavigate()
@@ -97,7 +97,7 @@ const Nav = () => {
                 }
               </Box>
               <Box onClick={()=>navigate('/cart')}>
-                <Badge badgeContent={4} sx={{color:'#fff',mt: 3, cursor: "pointer",fontSize:'15px'}} color="primary">
+                <Badge badgeContent={CartList.length} sx={{color:'#fff',mt: 3, cursor: "pointer",fontSize:'15px'}} color="primary">
                   <AddShoppingCartIcon sx={{fontSize:'25px'}} />
                 </Badge>
               </Box>

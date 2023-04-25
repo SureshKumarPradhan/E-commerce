@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { CategoryListAction,RecomandedListAction ,SingleProductDataAction,ProductListAction,getProductByCategory,getCartList} from '../Action/ProductAction';
+import { CategoryListAction,RecomandedListAction ,SingleProductDataAction,ProductListAction,getProductByCategory} from '../Action/ProductAction';
 const initialState = {
 CategoryData:{
     data:[],
@@ -46,6 +46,38 @@ export const productSlice = createSlice({
     } ,
     filterProduct: (state,action) => {
         state.ProductListData.filterData = state.ProductListData.filterData.filter(ele=>ele.category !== action.payload)
+    },
+    addToCart:(state,action) => {
+      if(state.CartData.data.some(item => item.id === action.payload.id)){
+        state.CartData.data = state.CartData.data.map(ele=>ele.id === action.payload.id ? {...action.payload,quantity:ele.quantity + 1,price:(ele.quantity + 1) * ele.realPrice} : {...ele})
+      }else{
+        state.CartData.data.push({...action.payload,quantity:1,realPrice:action.payload.price})
+      }
+    },
+    increment:(state,action)=>{
+      const updateCartList = state.CartData.data.map(ele=>{
+        if(ele.id === action.payload){
+          return {...ele,quantity:ele.quantity + 1,price:(ele.quantity+1) * (ele.realPrice)}
+        }else{
+          return {...ele}
+        }
+      })
+
+      state.CartData.data = updateCartList
+    },
+    decrement:(state,action)=>{
+      const updateCartList = state.CartData.data.map(ele=>{
+        if(ele.id === action.payload){
+          return {...ele,quantity:(ele.quantity - 1),price:((ele.quantity - 1) * (ele.realPrice))}
+        }else{
+          return {...ele}
+        }
+      })
+
+      state.CartData.data = updateCartList
+    },
+    removeCart:(state,action)=>{
+      state.CartData.data = state.CartData.data.filter(ele=>ele.id !== action.payload)
     }
   },
   extraReducers:{
@@ -94,16 +126,16 @@ export const productSlice = createSlice({
         state.ProductListData.isSucess = true;
         state.ProductListData.filterData =  [...state.ProductListData.filterData , ...payload];
       },
-      [getCartList.rejected]: (state, { payload }) => {
-        state.CartData.isLoading = false;
-        state.CartData.isSucess = false;
-        state.CartData.ProductListData = payload
-      },
-      [getCartList.fulfilled]: (state, { payload }) => {
-        state.CartData.isLoading = false;
-        state.CartData.isSucess = true;
-        state.CartData.data =  payload;
-      },
+      // [getCartList.rejected]: (state, { payload }) => {
+      //   state.CartData.isLoading = false;
+      //   state.CartData.isSucess = false;
+      //   state.CartData.ProductListData = payload
+      // },
+      // [getCartList.fulfilled]: (state, { payload }) => {
+      //   state.CartData.isLoading = false;
+      //   state.CartData.isSucess = true;
+      //   state.CartData.data =  payload;
+      // },
 
     },
 
@@ -111,7 +143,7 @@ export const productSlice = createSlice({
 )
 
 // Action creators are generated for each case reducer function
-export const {setIsfilter,filterProduct  } = productSlice.actions
+export const {setIsfilter,filterProduct,addToCart,increment,decrement,removeCart} = productSlice.actions
 
 export default productSlice.reducer
 
