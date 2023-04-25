@@ -76,7 +76,7 @@ export const SliderComponent = () => {
             position: "absolute",
             top: "40%",
             left: "6%",
-            backgroundColor: "#fff",    
+            backgroundColor: "#fff",
             p: 3,
             maxWidth: "600px",
             borderTopLeftRadius: "10px",
@@ -85,7 +85,9 @@ export const SliderComponent = () => {
             borderBottomRightRadius: "10px",
           }}
         >
-          <h1 style={{ color: "#21263c",textTransform:'cap' }}>{items[currentIndex].title}</h1>
+          <h1 style={{ color: "#21263c", textTransform: "cap" }}>
+            {items[currentIndex].title}
+          </h1>
           <h2 style={{ fontFamily: "serif" }}>{items[currentIndex].about}</h2>
           <Button variant="contained" color="success">
             Explore Now
@@ -96,4 +98,4 @@ export const SliderComponent = () => {
   );
 };
 
-export default SliderComponent
+export default SliderComponent;

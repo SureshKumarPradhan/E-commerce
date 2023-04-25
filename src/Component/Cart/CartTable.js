@@ -9,7 +9,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { increment, decrement,removeCart } from "../../Reducer/RootReducer";
+import { increment, decrement, removeCart } from "../../Reducer/RootReducer";
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
@@ -32,8 +32,8 @@ const CartTable = ({ cartData }) => {
     dispatch(decrement(id));
   };
   const handleRemove = (id) => {
-    dispatch(removeCart(id))
-  }
+    dispatch(removeCart(id));
+  };
 
   return (
     <Box sx={{ display: "flex", m: 1 }}>
@@ -91,7 +91,6 @@ const CartTable = ({ cartData }) => {
                       <button
                         style={{ outline: "none" }}
                         onClick={() => incrementQuantity(ele.id)}
-                        
                       >
                         +
                       </button>
@@ -111,7 +110,12 @@ const CartTable = ({ cartData }) => {
                     </Box>
                   </TableCell>
                   <TableCell align="left">
-                    <Button variant="contained" color="error" size="small" onClick={()=>handleRemove(ele.id)}>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      size="small"
+                      onClick={() => handleRemove(ele.id)}
+                    >
                       Remove
                     </Button>
                   </TableCell>
@@ -121,7 +125,6 @@ const CartTable = ({ cartData }) => {
           </TableBody>
         </Table>
       </TableContainer>
-      
     </Box>
   );
 };

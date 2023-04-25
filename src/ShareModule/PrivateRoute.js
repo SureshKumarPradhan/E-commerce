@@ -5,7 +5,7 @@ const PrivateRoute = ({ children }) => {
   return (
     <>
       <Nav />
-      <div style={{minHeight:'85.3vh'}}>{children}</div>
+      <div style={{ minHeight: "85.3vh" }}>{children}</div>
       <Footer />
     </>
   );

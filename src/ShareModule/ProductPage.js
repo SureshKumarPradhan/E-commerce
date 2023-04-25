@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import image from "./img/jewelryCover.jpg";
 import Badge from "@mui/material/Badge";
@@ -9,15 +9,17 @@ import { useSelector } from "react-redux";
 import { SingleProductDataAction } from "../Action/ProductAction";
 import StarIcon from "@mui/icons-material/Star";
 const ProductPage = () => {
-    const location = useLocation()
-    const dispatch = useDispatch()
-    const singleProductData = useSelector(state=>state.ProductReducer.SingleProductData.data)
-    useEffect(()=>{
-        if(location.state){
-            dispatch(SingleProductDataAction(location.state))
-        }
-    },[])
-    console.log(singleProductData,"single")
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const singleProductData = useSelector(
+    (state) => state.ProductReducer.SingleProductData.data
+  );
+  useEffect(() => {
+    if (location.state) {
+      dispatch(SingleProductDataAction(location.state));
+    }
+  }, []);
+  console.log(singleProductData, "single");
   return (
     <Box>
       <Grid container>
@@ -29,7 +31,11 @@ const ProductPage = () => {
               justifyContent: "center",
             }}
           >
-             <Chip label={`${'Best Seller'}`} color="success" sx={{ mt: 1, mb: 1 }} />
+            <Chip
+              label={`${"Best Seller"}`}
+              color="success"
+              sx={{ mt: 1, mb: 1 }}
+            />
             <img
               alt=""
               src={singleProductData.image}
@@ -47,17 +53,18 @@ const ProductPage = () => {
         <Grid xs={4} md={6} lg={6} item>
           <Box sx={{ mt: 4 }}>
             <Typography variant="h5" sx={{ color: "gray" }}>
-             {singleProductData.title}
+              {singleProductData.title}
             </Typography>
             <Typography variant="h6" sx={{ mt: 1 }}>
-              {
-              `₹ ${singleProductData.price}` }
+              {`₹ ${singleProductData.price}`}
             </Typography>
-            <Chip label={`${singleProductData?.rating?.rate} ✡`} color="secondary" sx={{ mt: 1, mb: 1 }} />
+            <Chip
+              label={`${singleProductData?.rating?.rate} ✡`}
+              color="secondary"
+              sx={{ mt: 1, mb: 1 }}
+            />
             <Box>
-              <Typography>
-               {singleProductData.description}
-              </Typography>
+              <Typography>{singleProductData.description}</Typography>
             </Box>
             <Box sx={{ mt: 3 }}>
               <Button variant="contained" size="small" color="success">

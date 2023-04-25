@@ -6,28 +6,30 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
-import Tooltip from '@mui/material/Tooltip';
-import Rating from '@mui/material/Rating';
+import Tooltip from "@mui/material/Tooltip";
+import Rating from "@mui/material/Rating";
 import { useNavigate } from "react-router-dom";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../Reducer/RootReducer";
 
-const RecomandedProduct = ({ data,component }) => {
+const RecomandedProduct = ({ data, component }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const openProductPage = (id) => {
-    navigate('/product_Page',{ state:id })
-  }
-  const addCartData = (ele) =>{
-    dispatch(addToCart(ele))
-    alert("Sucessfully Add To Cart")
-  }
+    navigate("/product_Page", { state: id });
+  };
+  const addCartData = (ele) => {
+    dispatch(addToCart(ele));
+    alert("Sucessfully Add To Cart");
+  };
   return (
     <Box sx={{ mt: 3 }}>
       <Typography
         sx={{ textAlign: "center", fontSize: "20px", fontFamily: "serif" }}
       >
-      {component === "Product_List" ? "Product List Item's" :  "Recomanded Items"}
+        {component === "Product_List"
+          ? "Product List Item's"
+          : "Recomanded Items"}
       </Typography>
       <hr
         style={{
@@ -50,38 +52,49 @@ const RecomandedProduct = ({ data,component }) => {
         {data.length > 0 &&
           data.map((ele, index) => (
             <Card
-            key={index  }
+              key={index}
               raised
               sx={{
                 maxWidth: 345,
                 m: 3,
                 position: "relative",
-                minHeight:'430px'
+                minHeight: "430px",
               }}
-            > 
-            <Typography component="legend" sx={{float:'right'}}>{ele?.rating?.rate} </Typography>
-             <Rating name="half-rating" precision={0.5}  defaultValue={ele?.rating?.rate} max={5} sx={{float:'right'}} readOnly />
+            >
+              <Typography component="legend" sx={{ float: "right" }}>
+                {ele?.rating?.rate}{" "}
+              </Typography>
+              <Rating
+                name="half-rating"
+                precision={0.5}
+                defaultValue={ele?.rating?.rate}
+                max={5}
+                sx={{ float: "right" }}
+                readOnly
+              />
               <CardMedia
                 component="img"
                 alt={ele.image}
                 height="200"
                 image={ele.image}
-                sx={{ objectFit: "contain",ml:-.5,mt:.5 }}
+                sx={{ objectFit: "contain", ml: -0.5, mt: 0.5 }}
               />
               <CardContent>
-              <Tooltip title={ele.title}>
-                <Typography gutterBottom variant="p" onClick={()=>openProductPage(ele.id)} sx={{ fontSize: "15px",cursor:'pointer' 
-                }}>
-                  
-                  {ele?.title?.length > 35
-                    ? ele.title.slice(0, 35) + "...."
-                    : ele.title}
+                <Tooltip title={ele.title}>
+                  <Typography
+                    gutterBottom
+                    variant="p"
+                    onClick={() => openProductPage(ele.id)}
+                    sx={{ fontSize: "15px", cursor: "pointer" }}
+                  >
+                    {ele?.title?.length > 35
+                      ? ele.title.slice(0, 35) + "...."
+                      : ele.title}
+                  </Typography>
+                </Tooltip>
+                <Typography variant="h6" sx={{ mt: 1 }}>
+                  {`₹ ${ele.price}`}
                 </Typography>
-              </Tooltip>
-              <Typography variant="h6" sx={{ mt: 1 }}>
-              {
-              `₹ ${ele.price}` }
-            </Typography>
                 <Typography
                   variant="body2"
                   color="text.secondary"
@@ -92,9 +105,17 @@ const RecomandedProduct = ({ data,component }) => {
                     : ele.description}
                 </Typography>
               </CardContent>
-              <CardActions sx={{mt:-3,}}>
-                <Button size="small" variant="outlined">Buy Now</Button>
-                <Button size="small" variant="outlined" onClick={()=>addCartData(ele)}>Add to Cart</Button>
+              <CardActions sx={{ mt: -3 }}>
+                <Button size="small" variant="outlined">
+                  Buy Now
+                </Button>
+                <Button
+                  size="small"
+                  variant="outlined"
+                  onClick={() => addCartData(ele)}
+                >
+                  Add to Cart
+                </Button>
               </CardActions>
             </Card>
           ))}
